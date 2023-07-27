@@ -84,15 +84,3 @@ figletAsciiMerlin = """
 
 def getBanner():
     return choice([figletAsciiAlligator, figletAsciiBloody, figletAsciiFlower, figletAsciiIsometric, figletAsciiRebel, figletAsciiMerlin])
-
-import colorama
-colorama.init()    
-
-COLOR_RED = colorama.Fore.RED
-COLOR_GREEN = colorama.Fore.GREEN
-COLOR_YELLOW = colorama.Fore.YELLOW
-COLOR_BLUE = colorama.Fore.BLUE
-COLOR_RESET = colorama.Style.RESET_ALL
-
-
-print(COLOR_RED + figletAsciiRebel)
