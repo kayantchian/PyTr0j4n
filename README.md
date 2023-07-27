@@ -22,14 +22,13 @@
 [![Commit][commit-shield]][commit-url]
 
 
-<!-- PROJECT LOGO
+<!-- PROJECT LOGO-->
 <br />
 <div align="center">
   <a>
-
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo">
   </a>
--->
+
   <h3 align="center">PyTr0j4n</h3>
 
   <p align="center">
@@ -89,7 +88,7 @@ _Below is an example of how you can instruct your audience on installing and set
    
 4. You can use pyarmor or pyinstaller to package the trojan to an `.EXE` file if you prefer.
 
-5. Now, send `trojan.py (.EXE)` to the victim and use `ìinterface.py` or any other (like netcat) to receive the reverse connection from the victim. 
+5. Now, send `trojan.py` (.EXE) to the victim and use `interface.py` or any other (like netcat) to receive the reverse connection from the victim. 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
