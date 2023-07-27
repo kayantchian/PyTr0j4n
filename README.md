@@ -22,14 +22,13 @@
 [![Commit][commit-shield]][commit-url]
 
 
-<!-- PROJECT LOGO
+<!-- PROJECT LOGO-->
 <br />
 <div align="center">
   <a>
-
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo">
   </a>
--->
+
   <h3 align="center">PyTr0j4n</h3>
 
   <p align="center">
