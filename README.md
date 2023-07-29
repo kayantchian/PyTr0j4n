@@ -107,11 +107,22 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Persistent trojan
-- [X] Support for multiple connections
-- [X] Menu to manage connections
-- [ ] Take screenshots
-
+- [x] <b>Persistent trojan</b>: <br>
+The trojan self-copies to the user's TEMP folder and adds a value in the Windows registry to auto-start itself.
+- [X] <b>Support for multiple connections</b>: <br>
+It handles multiple clients simultaneously using multithreading. When a client connects to the server, a new thread is created to handle that client's communication independently.
+- [X] <b>Ngrok tunnel (Optional):</b> <br>
+ The server provides the option to automatically create an ngrok tunnel to allow clients to connect to it over the internet.
+ The ngrok tunnel is created using the pyngrok library.
+ The user can choose whether to create the ngrok tunnel or not at the beginning of the server execution.
+- [X] <b>Menu for Managing Connections:</b> <br>
+The server displays a menu with options to list connected clients and initiate a chat session with a specific client.
+- [X] <b>Client control</b>: <br>
+The server maintains a dictionary of connected clients, associating each client with a thread, IP address, and socket.
+- [ ] <b>Take screenshots</b>
+- [ ] <b>File Upload</b>
+- [ ] <b>Passwords dump</b> (chrome/wifi/etc.)
+- [ ] <b>Webcam acess</b>
 
 See the [![Open Issues][issues-shield]][issues-url] for a full list of proposed features (and known issues).
 
