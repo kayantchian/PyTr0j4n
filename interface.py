@@ -171,7 +171,7 @@ def main():
     time.sleep(2)
     print(f"\t{COLOR_BLUE}Author: {COLOR_RESET}Kayan Tchian | {COLOR_BLUE}GitHub: {COLOR_RESET}kayantchian\n")
     print(f"{COLOR_GREEN}[*] Welcome to PyTr0j4n")
-    print(f"{COLOR_YELLOW}[++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]\n\n")
+    print(f"{COLOR_CYAN}[++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++]\n\n")
 
     server.startServer()
 

