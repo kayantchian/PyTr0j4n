@@ -107,7 +107,9 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Persistent trojan 
+- [x] Persistent trojan
+- [X] Support for multiple connections
+- [X] Menu to manage connections
 - [ ] Take screenshots
 
 
